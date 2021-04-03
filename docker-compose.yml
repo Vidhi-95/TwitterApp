@@ -1,9 +1,8 @@
 #version: '3.8'
 # see here https://docs.docker.com/compose/compose-file/compose-versioning/
-version: '3.1'
+version: "3.1"
 
 services:
-
   be:
     build:
       context: ./be
@@ -29,22 +28,22 @@ services:
       dockerfile: Dockerfile
     # ~dk same problem here..
     #volumes:
-      #- './fe:/usr/src/app'
-      #- '/usr/src/app/node_modules'
+    #- './fe:/usr/src/app'
+    #- '/usr/src/app/node_modules'
     ports:
       - 3007:80
     environment:
       - NODE_ENV=development
       - BE_NETWORK=backend
       - BE_PORT=5000
-      - REACT_APP_API_SERVICE_URL=${REACT_APP_API_SERVICE_URL}
+      # - REACT_APP_API_SERVICE_URL=${REACT_APP_API_SERVICE_URL}
     depends_on:
       - be
     # specifies frontend and backend as the networks the fe service will have access to
     networks:
       - frontend
       - backend
-      
+
 # bridge networks to allow the containers to communicate with each other
 networks:
   frontend:
